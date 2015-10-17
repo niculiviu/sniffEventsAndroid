@@ -1,0 +1,14 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="ro.as_mi.sniff.sniffevents.EventInfo">
+    <item android:id="@+id/action_settings" android:title="@string/action_settings"
+        android:icon="@drawable/u"
+        android:orderInCategory="100" app:showAsAction="always" />
+    <item android:id="@+id/action_join" android:title="Add To Favorites"
+        android:icon="@drawable/j"
+        android:orderInCategory="100" app:showAsAction="always" />
+    <item android:id="@+id/action_location" android:title="Location"
+        android:icon="@drawable/mappointer"
+        android:orderInCategory="100" app:showAsAction="always" />
+</menu>

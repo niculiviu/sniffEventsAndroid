@@ -1,0 +1,62 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="ro.as_mi.sniff.sniffevents.FeedbackActivity"
+    android:padding="10dp">
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/nume"
+        android:layout_alignParentTop="true"
+        android:background="#fff"
+        android:padding="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:hint="Nume (Optional)"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:id="@+id/feedback"
+        android:layout_below="@+id/nume"
+        android:layout_marginTop="5dp"
+        android:background="#fff"
+        android:padding="10dp"
+        android:hint="Feedback"
+        android:inputType="textLongMessage|text"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TRIMITE"
+        android:id="@+id/sendFeedback"
+        android:background="#258e25"
+        android:textColor="#fff"
+        android:layout_below="@+id/feedback"
+        android:layout_alignRight="@+id/feedback"
+        android:layout_alignEnd="@+id/feedback"
+        android:layout_alignLeft="@+id/feedback"
+        android:layout_alignStart="@+id/feedback"
+        android:layout_marginTop="0dp" />
+
+    <ProgressBar
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/loading"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:indeterminate="false" />
+</RelativeLayout>

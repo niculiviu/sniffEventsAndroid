@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Sniffy</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_register">înregistrare</string>
+    <string name="title_activity_dashboard">Evenimente</string>
+    <string name="title_activity_event_info">EventInfo</string>
+    <string name="title_activity_feedback">FeedbackActivity</string>
+    <string name="title_activity_event_desc">Descriere Eveniment</string>
+    <string name="title_activity_program">Program Eveniment</string>
+    <string name="title_activity_settings">Setari</string>
+    <string name="title_activity_change_password">Schimbă parola</string>
+    <string name="title_activity_edit_profile">Editează profilul</string>
+    <string name="title_activity_favorites">Evenimente Favorite</string>
+    <string name="title_activity_filters">Filtreaza Evenimente</string>
+    <string name="title_activity_location">Map</string>
+</resources>

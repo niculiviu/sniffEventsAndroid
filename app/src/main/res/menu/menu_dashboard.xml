@@ -1,0 +1,39 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="ro.as_mi.sniff.sniffevents.DashboardActivity">
+    <item android:id="@+id/action_settings" android:title="@string/action_settings"
+        android:icon="@drawable/u"
+        android:orderInCategory="100" app:showAsAction="always" />
+    <item android:id="@+id/action_filter" android:title="@string/action_settings"
+        android:icon="@drawable/f"
+        android:orderInCategory="100" app:showAsAction="always" >
+
+        <menu>
+
+            <item android:id="@+id/educational" android:icon="@drawable/educational" android:title="Educational"></item>
+            <item android:id="@+id/cariera" android:icon="@drawable/cariera" android:title="Cariera"></item>
+            <item android:id="@+id/social" android:icon="@drawable/social" android:title="Social"></item>
+            <item android:id="@+id/distractie" android:icon="@drawable/distractie" android:title="Distractie"></item>
+            <item android:id="@+id/concurs" android:icon="@drawable/concurs" android:title="Concurs"></item>
+            <item android:id="@+id/training" android:icon="@drawable/training" android:title="Training"></item>
+
+        </menu>
+        </item>
+    <item android:id="@+id/action_clock" android:title="@string/action_settings"
+        android:icon="@drawable/cl"
+        android:orderInCategory="100" app:showAsAction="always" >
+
+        <menu>
+
+            <item android:id="@+id/azi" android:icon="@drawable/cicon" android:title="Astazi"></item>
+            <item android:id="@+id/saptamana" android:icon="@drawable/cicon" android:title="Saptamana aceasta"></item>
+            <item android:id="@+id/luna" android:icon="@drawable/cicon" android:title="Luna aceasta"></item>
+
+        </menu>
+    </item>
+
+    <item android:id="@+id/action_refresh" android:title="Refresh"
+        android:icon="@drawable/refresh36"
+        android:orderInCategory="100" app:showAsAction="always" />
+</menu>
