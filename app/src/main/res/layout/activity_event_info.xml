@@ -51,6 +51,16 @@
         android:textStyle="bold"
         android:background="#2a822a" />
 
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/frameLayout"
+        android:layout_alignTop="@+id/detalii"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+    </FrameLayout>
+
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="fill_parent"
@@ -182,15 +192,13 @@
         android:layout_height="wrap_content"
         android:text="DETALII EVENIMENT"
         android:id="@+id/detalii"
-        android:background="#258e25"
-        android:textColor="#fff"
-        android:layout_below="@+id/linearLayout2"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
+        android:background="#fff"
+        android:textColor="#333"
+        android:layout_below="@+id/imageEv"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="1dp"
-        android:layout_marginTop="1dp" />
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
     <Button
         style="?android:attr/buttonStyleSmall"
@@ -198,12 +206,20 @@
         android:layout_height="wrap_content"
         android:text="VEZI PROGRAMUL"
         android:id="@+id/programBtn"
-        android:background="#258e25"
-        android:textColor="#fff"
+        android:background="#fff"
+        android:textColor="#333"
         android:layout_below="@+id/detalii"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
+
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="140dp"
+        android:id="@+id/imageEv"
+        android:layout_below="@+id/linearLayout2"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>

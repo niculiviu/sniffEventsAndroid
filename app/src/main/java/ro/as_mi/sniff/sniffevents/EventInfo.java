@@ -16,6 +16,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
@@ -54,6 +55,7 @@ public class EventInfo extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_info);
+
         someData = getSharedPreferences(filename,0);
         getSupportActionBar().setElevation(0);
         SharedUserID=someData.getString("id","nu");
@@ -108,6 +110,11 @@ public class EventInfo extends ActionBarActivity {
 
         TextView ev_address=(TextView) findViewById(R.id.address);
         ev_address.setText(adresa);
+
+        boolean memCache = false;
+        boolean fileCache = true;
+
+
 
         TextView ev_location=(TextView) findViewById(R.id.location);
         ev_location.setText(locatie);

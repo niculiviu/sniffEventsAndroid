@@ -1,8 +1,12 @@
 package ro.as_mi.sniff.sniffevents;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.media.Image;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -26,12 +30,32 @@ import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
 
+import org.apache.http.util.ByteArrayBuffer;
+
+import android.util.Log;
+
+
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+
+import java.io.InputStream;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
 
 public class DashboardActivity extends ActionBarActivity {
+    Bitmap bitmap;
+    ProgressDialog pDialog;
 
     ProgressBar pb;
     SharedPreferences someData;
@@ -41,8 +65,10 @@ public class DashboardActivity extends ActionBarActivity {
     public static String filename="MySharedString";
     public ListView listView;
     public boolean ok;
+    ImageView img;
     public String SharedUserID;
     public TextView no_Event;
+    ImageLoader imageLoader = ImageLoader.getInstance(); // Get singleton instance
     /*public static String get_projects_url="http://sniff.as-mi.ro/services/getPublicEvents.php";*/
     public static String get_projects_url="http://sniff.as-mi.ro/services/getPublicEvents.php";
     public static String getGet_projects_cat="http://sniff.as-mi.ro/services/mobileGetPublishedEventsByCategory.php";
@@ -52,10 +78,18 @@ public class DashboardActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
+
+
+        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(this)
+                .diskCacheExtraOptions(480, 800, null)
+                .build();
+
+        ImageLoader.getInstance().init(config);
+
         someData = getSharedPreferences(filename,0);
         pb=(ProgressBar)findViewById(R.id.loader);
         pb.setVisibility(View.INVISIBLE);
-
+        img = (ImageView) findViewById(R.id.image);
         no_Event=(TextView) findViewById(R.id.noEvent);
         no_Event.setVisibility(View.INVISIBLE);
         listView=(ListView) findViewById(R.id.eventList);
@@ -374,6 +408,8 @@ public class DashboardActivity extends ActionBarActivity {
             super(DashboardActivity.this,R.layout.event,pro_list);
         }
 
+
+
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
 
@@ -421,7 +457,51 @@ public class DashboardActivity extends ActionBarActivity {
             TextView cat=(TextView) viewItem.findViewById(R.id.cat);
             cat.setText(currentE.getOrg());
 
+
+            boolean memCache = false;
+            boolean fileCache = true;
+
+           // aq.id(R.id.image).image("http://sniff.as-mi.ro/services/images/"+currentE.getId()+"_r.png", memCache, fileCache);
+
+            imageLoader.displayImage("http://sniff.as-mi.ro/services/images/"+currentE.getId()+"_r.png", (ImageView) viewItem.findViewById(R.id.image));
+
             return viewItem;
+        }
+    }
+
+    private class LoadImage extends AsyncTask<String, String, Bitmap> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            pDialog = new ProgressDialog(DashboardActivity.this);
+            pDialog.setMessage("Loading Image ....");
+            pDialog.show();
+
+        }
+        protected Bitmap doInBackground(String... args) {
+            try {
+                bitmap = BitmapFactory.decodeStream((InputStream)new URL(args[0]).getContent());
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return bitmap;
+        }
+
+        protected void onPostExecute(Bitmap image) {
+
+            if(image != null){
+
+
+                pDialog.dismiss();
+
+            }else{
+
+                pDialog.dismiss();
+                Toast.makeText(DashboardActivity.this, "Image Does Not exist or Network Error", Toast.LENGTH_SHORT).show();
+
+            }
         }
     }
 }

@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/SniffEvents.iml" filepath="$PROJECT_DIR$/SniffEvents.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sniffEventsAndroid.iml" filepath="$PROJECT_DIR$/sniffEventsAndroid.iml" />
     </modules>
   </component>
 </project>
