@@ -7,7 +7,7 @@
         android:orderInCategory="100" app:showAsAction="always" />
     <item android:id="@+id/action_filter" android:title="@string/action_settings"
         android:icon="@drawable/f"
-        android:orderInCategory="100" app:showAsAction="always" >
+        android:orderInCategory="100" app:showAsAction="never" >
 
         <menu>
 
@@ -22,7 +22,7 @@
         </item>
     <item android:id="@+id/action_clock" android:title="@string/action_settings"
         android:icon="@drawable/cl"
-        android:orderInCategory="100" app:showAsAction="always" >
+        android:orderInCategory="100" app:showAsAction="never" >
 
         <menu>
 

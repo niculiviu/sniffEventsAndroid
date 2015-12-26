@@ -3,10 +3,86 @@
     android:layout_height="match_parent"
     tools:context="ro.as_mi.sniff.sniffevents.DashboardActivity">
 
+    <FrameLayout
+        android:layout_width="70dp"
+        android:layout_height="fill_parent"
+        android:background="#262626"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/frameLayout2">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_gravity="center_horizontal|top"
+            android:weightSum="1">
+
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="70dp"
+                android:id="@+id/ed"
+                android:src="@drawable/educational"
+                android:padding="15dp"
+                android:clickable="true"
+                android:alpha="0.4" />
+
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="70dp"
+                android:id="@+id/ca"
+                android:src="@drawable/cariera"
+                android:padding="15dp"
+                android:clickable="true"
+                android:alpha="0.4" />
+
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="70dp"
+                android:id="@+id/so"
+                android:src="@drawable/social"
+                android:padding="15dp"
+                android:clickable="true"
+                android:alpha="0.4" />
+
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="70dp"
+                android:id="@+id/di"
+                android:src="@drawable/distractie"
+                android:padding="15dp"
+                android:clickable="true"
+                android:alpha="0.4" />
+
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="70dp"
+                android:id="@+id/co"
+                android:src="@drawable/concurs"
+                android:padding="15dp"
+                android:clickable="true"
+                android:alpha="0.4" />
+
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="70dp"
+                android:id="@+id/tr"
+                android:src="@drawable/training"
+                android:padding="15dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:alpha="0.4" />
+        </LinearLayout>
+    </FrameLayout>
+
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/eventList" />
+        android:id="@+id/eventList"
+        android:layout_toRightOf="@+id/frameLayout2"
+        android:layout_toEndOf="@+id/frameLayout2" />
 
     <ProgressBar
         android:layout_width="wrap_content"

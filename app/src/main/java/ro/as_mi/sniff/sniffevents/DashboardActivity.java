@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.media.Image;
 import android.net.ConnectivityManager;
@@ -68,6 +69,14 @@ public class DashboardActivity extends ActionBarActivity {
     ImageView img;
     public String SharedUserID;
     public TextView no_Event;
+
+    ImageView ed;
+    ImageView ca;
+    ImageView so;
+    ImageView di;
+    ImageView co;
+    ImageView tr;
+
     ImageLoader imageLoader = ImageLoader.getInstance(); // Get singleton instance
     /*public static String get_projects_url="http://sniff.as-mi.ro/services/getPublicEvents.php";*/
     public static String get_projects_url="http://sniff.as-mi.ro/services/getPublicEvents.php";
@@ -101,6 +110,105 @@ public class DashboardActivity extends ActionBarActivity {
         }else{
             Toast.makeText(getApplicationContext(),"Internetul este dezactivat",Toast.LENGTH_LONG).show();
         }
+
+
+        ed=(ImageView) findViewById(R.id.ed);
+
+        ed.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String cat_id="1";
+                requestDataEvCat(getGet_projects_cat, cat_id);
+                ed.setAlpha((float) 1);
+                ca.setAlpha((float) 0.4);
+                so.setAlpha((float) 0.4);
+                di.setAlpha((float) 0.4);
+                co.setAlpha((float) 0.4);
+                tr.setAlpha((float) 0.4);
+
+            }
+        });
+
+
+        ca=(ImageView) findViewById(R.id.ca);
+
+        ca.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String cat_id="2";
+                requestDataEvCat(getGet_projects_cat, cat_id);
+                ed.setAlpha((float) 0.4);
+                ca.setAlpha((float) 1);
+                so.setAlpha((float) 0.4);
+                di.setAlpha((float) 0.4);
+                co.setAlpha((float) 0.4);
+                tr.setAlpha((float) 0.4);
+            }
+        });
+
+        so=(ImageView) findViewById(R.id.so);
+
+        so.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String cat_id="3";
+                requestDataEvCat(getGet_projects_cat, cat_id);
+                ed.setAlpha((float) 0.4);
+                ca.setAlpha((float) 0.4);
+                so.setAlpha((float) 1);
+                di.setAlpha((float) 0.4);
+                co.setAlpha((float) 0.4);
+                tr.setAlpha((float) 0.4);
+            }
+        });
+
+        di=(ImageView) findViewById(R.id.di);
+
+        di.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String cat_id="4";
+                requestDataEvCat(getGet_projects_cat, cat_id);
+                ed.setAlpha((float) 0.4);
+                ca.setAlpha((float) 0.4);
+                so.setAlpha((float) 0.4);
+                di.setAlpha((float) 1);
+                co.setAlpha((float) 0.4);
+                tr.setAlpha((float) 0.4);
+            }
+        });
+
+        co=(ImageView) findViewById(R.id.co);
+
+        co.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String cat_id="5";
+                requestDataEvCat(getGet_projects_cat, cat_id);
+                ed.setAlpha((float) 0.4);
+                ca.setAlpha((float) 0.4);
+                so.setAlpha((float) 0.4);
+                di.setAlpha((float) 0.4);
+                co.setAlpha((float) 1);
+                tr.setAlpha((float) 0.4);
+            }
+        });
+
+        tr=(ImageView) findViewById(R.id.tr);
+
+        tr.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String cat_id="6";
+                requestDataEvCat(getGet_projects_cat, cat_id);
+                ed.setAlpha((float) 0.4);
+                ca.setAlpha((float) 0.4);
+                so.setAlpha((float) 0.4);
+                di.setAlpha((float) 0.4);
+                co.setAlpha((float) 0.4);
+                tr.setAlpha((float) 1);
+            }
+        });
     }
 
     @Override
@@ -243,6 +351,12 @@ public class DashboardActivity extends ActionBarActivity {
         if (id == R.id.action_refresh) {
             if(isOnline()){
                 requestData(get_projects_url);
+                ed.setAlpha((float) 0.4);
+                ca.setAlpha((float) 0.4);
+                so.setAlpha((float) 0.4);
+                di.setAlpha((float) 0.4);
+                co.setAlpha((float) 0.4);
+                tr.setAlpha((float) 0.4);
             }else{
                 Toast.makeText(getApplicationContext(),"Internetul este dezactivat",Toast.LENGTH_LONG).show();
             }
@@ -423,7 +537,7 @@ public class DashboardActivity extends ActionBarActivity {
             event_name.setText(currentE.getTitlu());
             Integer d=Integer.parseInt(currentE.getDiff());
 
-            ImageView im=(ImageView) viewItem.findViewById(R.id.imageView2);
+            /*ImageView im=(ImageView) viewItem.findViewById(R.id.imageView2);
             if(currentE.getCategorie().equals("Educational")){
                 im.setImageResource(R.drawable.educational);
             }
@@ -441,7 +555,7 @@ public class DashboardActivity extends ActionBarActivity {
             }
             if(currentE.getCategorie().equals("Training")){
                 im.setImageResource(R.drawable.training);
-            }
+            }*/
             TextView organization_e=(TextView) viewItem.findViewById(R.id.org);
             if(currentE.getDiff().equals('0')) {
                 organization_e.setText("Astazi");
