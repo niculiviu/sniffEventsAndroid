@@ -2,18 +2,11 @@
 <items version="2" >
 
     <item
-        jar="C:\Users\liviu\AndroidStudioProjects\sniffEventsAndroid\app\build\intermediates\exploded-aar\com.google.android.gms\play-services\6.5.87\classes.jar"
+        jar="C:\Users\liviu\AndroidStudioProjects\sniffEventsAndroid\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.1.0\classes.jar"
         jumboMode="false"
         revision="21.1.2"
-        sha1="dd9247ea0fabe8ee479638c4b4a23e93752be256">
-        <dex dex="C:\Users\liviu\AndroidStudioProjects\sniffEventsAndroid\app\build\intermediates\pre-dexed\debug\classes-4d3b3822aac82d632560c5c0d64eb3ac95c90376.jar" />
-    </item>
-    <item
-        jar="C:\Users\liviu\AndroidStudioProjects\sniffEventsAndroid\app\build\intermediates\exploded-aar\com.android.support\support-v4\21.0.3\libs\internal_impl-21.0.3.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="01ec05bfbafcc07646ba813000bf2ef11742dd03">
-        <dex dex="C:\Users\liviu\AndroidStudioProjects\sniffEventsAndroid\app\build\intermediates\pre-dexed\debug\internal_impl-21.0.3-fbf86da2d45c773bdcd2eee565b7ff88f0248bc1.jar" />
+        sha1="eeebabdfd8203f6ab639ccea4ffa1f20e1adee3a">
+        <dex dex="C:\Users\liviu\AndroidStudioProjects\sniffEventsAndroid\app\build\intermediates\pre-dexed\debug\classes-6f7413d721f668ae0c2a816c4502b1d130d81d66.jar" />
     </item>
     <item
         jar="C:\Users\liviu\AndroidStudioProjects\SniffEvents\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\21.0.3\classes.jar"
@@ -23,25 +16,11 @@
         <dex dex="C:\Users\liviu\AndroidStudioProjects\SniffEvents\app\build\intermediates\pre-dexed\debug\classes-6d9c4a95071a925bf8ff1ef4bbe2248cd732733e.jar" />
     </item>
     <item
-        jar="C:\Users\liviu\AndroidStudioProjects\SniffEvents\app\build\intermediates\exploded-aar\com.google.android.gms\play-services\6.5.87\classes.jar"
+        jar="C:\Users\liviu\AndroidStudioProjects\sniffEventsAndroid\app\build\intermediates\exploded-aar\com.mcxiaoke.volley\library-aar\1.0.0\classes.jar"
         jumboMode="false"
         revision="21.1.2"
-        sha1="dd9247ea0fabe8ee479638c4b4a23e93752be256">
-        <dex dex="C:\Users\liviu\AndroidStudioProjects\SniffEvents\app\build\intermediates\pre-dexed\debug\classes-20724344c2a42ac998660a60beee21247398c3ee.jar" />
-    </item>
-    <item
-        jar="C:\Users\liviu\AndroidStudioProjects\sniffEventsAndroid\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\21.0.3\classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="81d42bf983a8741f4888a6e333e454e4a5e0eeb7">
-        <dex dex="C:\Users\liviu\AndroidStudioProjects\sniffEventsAndroid\app\build\intermediates\pre-dexed\debug\classes-71cd00f8765327b947aded96e2b92ac0d4e67f20.jar" />
-    </item>
-    <item
-        jar="C:\Users\liviu\AndroidStudioProjects\sniffEventsAndroid\app\build\intermediates\exploded-aar\com.android.support\support-v4\21.0.3\classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="2c91c949a45a21cdecf26e03951e46c7beec9ad8">
-        <dex dex="C:\Users\liviu\AndroidStudioProjects\sniffEventsAndroid\app\build\intermediates\pre-dexed\debug\classes-e32f624f9cbd8d0b93a22fb03615a9cde82d711d.jar" />
+        sha1="e40b9a81989bd4a846018551c280f8c4d837bf2e">
+        <dex dex="C:\Users\liviu\AndroidStudioProjects\sniffEventsAndroid\app\build\intermediates\pre-dexed\debug\classes-815ea32fe853fb4788e36fd960d30001fc090334.jar" />
     </item>
     <item
         jar="C:\Users\liviu\AndroidStudioProjects\SniffEvents\app\build\intermediates\exploded-aar\com.android.support\support-v4\21.0.3\libs\internal_impl-21.0.3.jar"
@@ -58,6 +37,13 @@
         <dex dex="C:\Users\liviu\AndroidStudioProjects\SniffEvents\app\build\intermediates\pre-dexed\debug\support-annotations-21.0.3-76e04371a6d8d8ac0eaf8c398e76f8ac7013b2a9.jar" />
     </item>
     <item
+        jar="C:\Users\liviu\AndroidStudioProjects\sniffEventsAndroid\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.1.0\libs\internal_impl-22.1.0.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="025cb89f2896c63200ff4c2e6c467a95691d880a">
+        <dex dex="C:\Users\liviu\AndroidStudioProjects\sniffEventsAndroid\app\build\intermediates\pre-dexed\debug\internal_impl-22.1.0-5cd4007f705cfb040e9a7ee55f1710f34bf9d53b.jar" />
+    </item>
+    <item
         jar="C:\Users\liviu\.gradle\caches\modules-2\files-2.1\com.nostra13.universalimageloader\universal-image-loader\1.9.5\442dbfb517b9ab5cb5c6da7ebf8cc28ec5bd0375\universal-image-loader-1.9.5.jar"
         jumboMode="false"
         revision="21.1.2"
@@ -65,11 +51,46 @@
         <dex dex="C:\Users\liviu\AndroidStudioProjects\sniffEventsAndroid\app\build\intermediates\pre-dexed\debug\universal-image-loader-1.9.5-7f75f41279a4de5d59f8973fe14f3b94ae3320bd.jar" />
     </item>
     <item
+        jar="C:\Users\liviu\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\23.1.0\support-annotations-23.1.0.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="92e3fc113ec3ee36b64603a38857b95700025633">
+        <dex dex="C:\Users\liviu\AndroidStudioProjects\sniffEventsAndroid\app\build\intermediates\pre-dexed\debug\support-annotations-23.1.0-bd4fae75f5bd27c7b5fa26a6b7fb0a297972600a.jar" />
+    </item>
+    <item
         jar="C:\Users\liviu\AndroidStudioProjects\SniffEvents\app\build\intermediates\exploded-aar\com.android.support\support-v4\21.0.3\classes.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="2c91c949a45a21cdecf26e03951e46c7beec9ad8">
         <dex dex="C:\Users\liviu\AndroidStudioProjects\SniffEvents\app\build\intermediates\pre-dexed\debug\classes-15671a087a7496647c92ae89a468d9f3280bd3c0.jar" />
+    </item>
+    <item
+        jar="C:\Users\liviu\AndroidStudioProjects\sniffEventsAndroid\app\build\intermediates\exploded-aar\com.google.android.gms\play-services\6.5.87\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="dd9247ea0fabe8ee479638c4b4a23e93752be256">
+        <dex dex="C:\Users\liviu\AndroidStudioProjects\sniffEventsAndroid\app\build\intermediates\pre-dexed\debug\classes-4d3b3822aac82d632560c5c0d64eb3ac95c90376.jar" />
+    </item>
+    <item
+        jar="C:\Users\liviu\AndroidStudioProjects\sniffEventsAndroid\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.1.0\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="983e2f375504bc04def18e709c35192afe92e65f">
+        <dex dex="C:\Users\liviu\AndroidStudioProjects\sniffEventsAndroid\app\build\intermediates\pre-dexed\debug\classes-8f2f1b4f07f1aa65770180d6e4e4b3e501f6c8a5.jar" />
+    </item>
+    <item
+        jar="C:\Users\liviu\AndroidStudioProjects\sniffEventsAndroid\app\build\intermediates\exploded-aar\com.wdullaer\swipeactionadapter\2.0.0\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="9c7d9f294a6bce06b60e4221c13e2e51ff1cd755">
+        <dex dex="C:\Users\liviu\AndroidStudioProjects\sniffEventsAndroid\app\build\intermediates\pre-dexed\debug\classes-1e6a3a8a27f88c82032cbe2f1b53837530dce735.jar" />
+    </item>
+    <item
+        jar="C:\Users\liviu\AndroidStudioProjects\SniffEvents\app\build\intermediates\exploded-aar\com.google.android.gms\play-services\6.5.87\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="dd9247ea0fabe8ee479638c4b4a23e93752be256">
+        <dex dex="C:\Users\liviu\AndroidStudioProjects\SniffEvents\app\build\intermediates\pre-dexed\debug\classes-20724344c2a42ac998660a60beee21247398c3ee.jar" />
     </item>
 
 </items>

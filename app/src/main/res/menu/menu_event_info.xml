@@ -10,5 +10,5 @@
         android:orderInCategory="100" app:showAsAction="always" />
     <item android:id="@+id/action_location" android:title="Location"
         android:icon="@drawable/mappointer"
-        android:orderInCategory="100" app:showAsAction="always" />
+        android:orderInCategory="100" app:showAsAction="never" />
 </menu>

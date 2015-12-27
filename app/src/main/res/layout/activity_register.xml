@@ -5,7 +5,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="ro.as_mi.sniff.sniffevents.Register"
-    android:background="@mipmap/bg2">
+    android:background="@drawable/bg">
 
     <EditText
         android:layout_width="fill_parent"

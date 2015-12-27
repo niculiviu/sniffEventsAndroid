@@ -3,6 +3,8 @@ package ro.as_mi.sniff.sniffevents;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
+import android.media.Image;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -13,7 +15,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import android.widget.Toast;
 
 
@@ -42,14 +48,17 @@ public class EventInfo extends ActionBarActivity {
     String start_hour;
     String end_hour;
     Button Feedback_btn;
+    Button Map_button;
     Button ProgButton;
     Button Detalii;
     ImageButton mapImg;
+    ImageView joinIcon;
     String ifProg;
     String event_id;
     String id_string;
     private Menu menu;
     public String action;
+    ImageLoader imageLoader = ImageLoader.getInstance();
     public String SharedUserID;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +78,12 @@ public class EventInfo extends ActionBarActivity {
         editor.putInt("event_id",eventsList.get(position).getId());
         editor.putString("start_hour",eventsList.get(position).getStart_hour());
         editor.putString("end_hour",eventsList.get(position).getEnd_hour());*/
+        joinIcon=(ImageView) findViewById(R.id.joinIcon);
+        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(this)
+                .diskCacheExtraOptions(480, 800, null)
+                .build();
+
+        ImageLoader.getInstance().init(config);
 
         titlu=someData.getString("event_name","");
         categorie=someData.getString("event_category","");
@@ -86,15 +101,14 @@ public class EventInfo extends ActionBarActivity {
         id_string=id.toString();
 
         ProgButton=(Button) findViewById(R.id.programBtn);
-        ProgButton.setVisibility(View.INVISIBLE);
-        if(!ifProg.equals("0")){
-            ProgButton.setVisibility(View.VISIBLE);
+        //ProgButton.setVisibility(View.INVISIBLE);
+        if(ifProg.equals("0")){
+            ProgButton.setEnabled(false);
         }
         TextView organization_e=(TextView) findViewById(R.id.org);
         organization_e.setText(titlu);
 
-        TextView cat=(TextView) findViewById(R.id.cat);
-        cat.setText(categorie);
+
 
         TextView start_date=(TextView) findViewById(R.id.startDate);
         start_date.setText(start);
@@ -110,6 +124,22 @@ public class EventInfo extends ActionBarActivity {
 
         TextView ev_address=(TextView) findViewById(R.id.address);
         ev_address.setText(adresa);
+        imageLoader.displayImage("http://sniff.as-mi.ro/services/images/" +id + "_r.png", (ImageView) findViewById(R.id.p));
+
+        ImageView evCat=(ImageView) findViewById(R.id.evCat);
+        if(categorie.equals("Educational"))
+            evCat.setImageResource(R.drawable.educational);
+        if(categorie.equals("Cariera"))
+            evCat.setImageResource(R.drawable.cariera);
+        if(categorie.equals("Social"))
+            evCat.setImageResource(R.drawable.social);
+        if(categorie.equals("Distractie"))
+            evCat.setImageResource(R.drawable.distractie);
+        if(categorie.equals("Concurs"))
+            evCat.setImageResource(R.drawable.concurs);
+        if(categorie.equals("Training"))
+            evCat.setImageResource(R.drawable.training);
+        evCat.bringToFront();
 
         boolean memCache = false;
         boolean fileCache = true;
@@ -124,6 +154,15 @@ public class EventInfo extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(v.getContext(),FeedbackActivity.class);
+                startActivityForResult(intent,0);
+            }
+        });
+
+        Map_button=(Button) findViewById(R.id.map);
+        Map_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(v.getContext(),LocationActivity.class);
                 startActivityForResult(intent,0);
             }
         });
@@ -152,6 +191,22 @@ public class EventInfo extends ActionBarActivity {
 
         }
 
+        if(SharedUserID.equals("nu"))
+        {
+            joinIcon.setVisibility(View.INVISIBLE);
+        }else{
+            joinIcon.setVisibility(View.VISIBLE);
+            joinIcon.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(isOnline()){
+                        requestData(join_event_url,someData.getString("id","0"),id_string,action);
+                    }
+                }
+            });
+        }
+
+
     }
 
     public boolean onPrepareOptionsMenu(Menu menu)
@@ -166,7 +221,7 @@ public class EventInfo extends ActionBarActivity {
         else
         {
             userIcon.setVisible(true);
-            favIcon.setVisible(true);
+            favIcon.setVisible(false);
         }
 
         return true;
@@ -273,21 +328,26 @@ public class EventInfo extends ActionBarActivity {
                   /*  pb.setVisibility(View.INVISIBLE);*/
                     if(s.toString().equals("inserted\n")) {
                         menu.getItem(1).setIcon(getResources().getDrawable(R.drawable.j_true));
+                        joinIcon.setImageResource(R.drawable.j_true);
+
                         action="1";
                     }
 
                     if(s.toString().equals("deleted\n")) {
                         menu.getItem(1).setIcon(getResources().getDrawable(R.drawable.j));
+                        joinIcon.setImageResource(R.drawable.j);
                         action="0";
                     }
 
                     if(s.toString().equals("true\n")){
                         menu.getItem(1).setIcon(getResources().getDrawable(R.drawable.j_true));
+                        joinIcon.setImageResource(R.drawable.j_true);
                         action="1";
                     }
 
                     if(s.toString().equals("false\n")){
                         menu.getItem(1).setIcon(getResources().getDrawable(R.drawable.j));
+                        joinIcon.setImageResource(R.drawable.j);
                         action="0";
                     }
                 }

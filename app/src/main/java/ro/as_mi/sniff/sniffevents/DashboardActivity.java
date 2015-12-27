@@ -1,5 +1,7 @@
 package ro.as_mi.sniff.sniffevents;
 
+import android.animation.ValueAnimator;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -7,6 +9,7 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.Movie;
 import android.graphics.drawable.Drawable;
 import android.media.Image;
 import android.net.ConnectivityManager;
@@ -19,7 +22,9 @@ import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -28,6 +33,26 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+
+import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
+import android.widget.ListView;
+import android.widget.Toast;
+
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
+
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -47,6 +72,8 @@ import android.util.Log;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.wdullaer.swipeactionadapter.SwipeActionAdapter;
+import com.wdullaer.swipeactionadapter.SwipeDirection;
 
 import java.io.InputStream;
 import java.net.URL;
@@ -69,6 +96,7 @@ public class DashboardActivity extends ActionBarActivity {
     ImageView img;
     public String SharedUserID;
     public TextView no_Event;
+    public SwipeActionAdapter mAdapter;
 
     ImageView ed;
     ImageView ca;
@@ -77,12 +105,57 @@ public class DashboardActivity extends ActionBarActivity {
     ImageView co;
     ImageView tr;
 
+    private SwipeRefreshLayout swipeRefreshLayout;
+
+    private List<Movie> movieList;
+
     ImageLoader imageLoader = ImageLoader.getInstance(); // Get singleton instance
     /*public static String get_projects_url="http://sniff.as-mi.ro/services/getPublicEvents.php";*/
     public static String get_projects_url="http://sniff.as-mi.ro/services/getPublicEvents.php";
     public static String getGet_projects_cat="http://sniff.as-mi.ro/services/mobileGetPublishedEventsByCategory.php";
     public static String getGet_projects_date="http://sniff.as-mi.ro/services/mobileGetPublishEventsByDate.php";
     public static String getGet_projects_org="http://sniff.as-mi.ro/services/mobileGetPublishedEventsByOrg.php";
+
+    public void sw() {
+        listView.setOnTouchListener(new View.OnTouchListener() {
+            private static final int DEFAULT_THRESHOLD = 128;
+            int initialX = 0;
+            final float slop = ViewConfiguration.get(getApplicationContext()).getScaledTouchSlop();
+
+            public boolean onTouch(final View view, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    initialX = (int) event.getX();
+                    view.setPadding(0, 0, 0, 0);
+                } else if (event.getAction() == MotionEvent.ACTION_MOVE) {
+                    int currentX = (int) event.getX();
+                    int offset = currentX - initialX;
+                    if (Math.abs(offset) > slop) {
+                        view.setPadding(offset, 0, 0, 0);
+
+                        if (offset > DEFAULT_THRESHOLD) {
+                            // TODO :: Do Right to Left action! And do nothing on action_up.
+                        } else if (offset < -DEFAULT_THRESHOLD) {
+                            // TODO :: Do Left to Right action! And do nothing on action_up.
+                        }
+                    }
+                } else if (event.getAction() == MotionEvent.ACTION_UP || event.getAction() == MotionEvent.ACTION_CANCEL) {
+                    // Animate back if no action was performed.
+                    ValueAnimator animator = ValueAnimator.ofInt(view.getPaddingLeft(), 0);
+                    animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                        @Override
+                        public void onAnimationUpdate(ValueAnimator valueAnimator) {
+                            view.setPadding((Integer) valueAnimator.getAnimatedValue(), 0, 0, 0);
+                        }
+                    });
+                    animator.setDuration(150);
+                    animator.start();
+                }
+
+                return false;
+            };
+        });
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -94,6 +167,24 @@ public class DashboardActivity extends ActionBarActivity {
                 .build();
 
         ImageLoader.getInstance().init(config);
+
+        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_layout);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                if(isOnline()){
+                    requestData(get_projects_url);
+                    ed.setAlpha((float) 0.4);
+                    ca.setAlpha((float) 0.4);
+                    so.setAlpha((float) 0.4);
+                    di.setAlpha((float) 0.4);
+                    co.setAlpha((float) 0.4);
+                    tr.setAlpha((float) 0.4);
+                }else{
+                    Toast.makeText(getApplicationContext(),"Internetul este dezactivat",Toast.LENGTH_LONG).show();
+                }
+            }
+        });
 
         someData = getSharedPreferences(filename,0);
         pb=(ProgressBar)findViewById(R.id.loader);
@@ -332,6 +423,8 @@ public class DashboardActivity extends ActionBarActivity {
         {
             userIcon.setVisible(true);
         }
+        MenuItem refresh=menu.findItem(R.id.action_refresh);
+        refresh.setVisible(false);
 
         return true;
     }
@@ -412,8 +505,8 @@ public class DashboardActivity extends ActionBarActivity {
 
         @Override
         protected void onPreExecute() {
-
-            pb.setVisibility(View.VISIBLE);
+            swipeRefreshLayout.setRefreshing(true);
+            pb.setVisibility(View.INVISIBLE);
         }
 
         @Override
@@ -429,9 +522,11 @@ public class DashboardActivity extends ActionBarActivity {
 
                 JSONArray arr = new JSONArray(s);
                 if(arr.length()==0){
+                    swipeRefreshLayout.setRefreshing(false);
                     no_Event.setVisibility(View.VISIBLE);
                 }else {
                     no_Event.setVisibility(View.INVISIBLE);
+                    swipeRefreshLayout.setRefreshing(false);
                 }
                 eventsList.clear();
                 String pro_desc;
@@ -461,6 +556,8 @@ public class DashboardActivity extends ActionBarActivity {
                 ArrayAdapter<Events> adapter = new projectListAdapter(eventsList);
 
                 listView.setAdapter(adapter);
+
+
 
 
 
@@ -498,10 +595,16 @@ public class DashboardActivity extends ActionBarActivity {
 
 
 
+
+
+
+
             }
             catch (Exception e){
                 e.printStackTrace();
             }
+
+
 
             pb.setVisibility(View.INVISIBLE);
         }

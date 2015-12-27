@@ -9,7 +9,8 @@
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <android:uses-permission
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         android:maxSdkVersion="18" />
@@ -130,6 +131,10 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="ro.as_mi.sniff.sniffevents.EventInfo" />
+        </activity>
+        <activity
+            android:name=".SideMenu"
+            android:label="@string/title_activity_side_menu" >
         </activity>
     </application>
 
