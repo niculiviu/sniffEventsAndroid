@@ -3,8 +3,6 @@ package ro.as_mi.sniff.sniffevents;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.drawable.Drawable;
-import android.media.Image;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -13,27 +11,26 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
-import android.widget.Toast;
 
 
-import org.w3c.dom.Text;
-
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 public class EventInfo extends ActionBarActivity {
 
     SharedPreferences someData;
     public static String filename="MySharedString";
-
+    public RelativeLayout joinContainer;
     public String join_event_url="http://sniff.as-mi.ro/services/joinEvent.php";
     public String if_join_url="http://sniff.as-mi.ro/services/ifJoin.php";
     String titlu;
@@ -45,6 +42,7 @@ public class EventInfo extends ActionBarActivity {
     String start;
     String end;
     String org;
+    String d;
     String start_hour;
     String end_hour;
     Button Feedback_btn;
@@ -60,25 +58,68 @@ public class EventInfo extends ActionBarActivity {
     public String action;
     ImageLoader imageLoader = ImageLoader.getInstance();
     public String SharedUserID;
+    public RelativeLayout over;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_info);
 
         someData = getSharedPreferences(filename,0);
-        getSupportActionBar().setElevation(0);
+//        getSupportActionBar().setElevation(0);
         SharedUserID=someData.getString("id","nu");
-       /*editor.putString("event_category", eventsList.get(position).getCategorie());
-        editor.putString("event_name", eventsList.get(position).getTitlu());
-        editor.putString("event_address",eventsList.get(position).getAdresa());
-        editor.putString("event_location",eventsList.get(position).getLocatie());
-        editor.putString("event_org",eventsList.get(position).getOrg());
-        editor.putString("start",eventsList.get(position).getStart());
-        editor.putString("end",eventsList.get(position).getEnd());
-        editor.putInt("event_id",eventsList.get(position).getId());
-        editor.putString("start_hour",eventsList.get(position).getStart_hour());
-        editor.putString("end_hour",eventsList.get(position).getEnd_hour());*/
+        ImageView eventListP;
+        ImageView account;
+        eventListP=(ImageView) findViewById(R.id.eventListP);
+        account=(ImageView) findViewById(R.id.userP);
+        ImageView heartP;
+        heartP=(ImageView) findViewById(R.id.heartP);
+        heartP.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(SharedUserID.equals("nu"))
+                {
+                    Intent intent=new Intent(getApplicationContext(),MainActivity.class);
+                    startActivityForResult(intent, 0);
+                }
+                else
+                {
+                    Intent intent=new Intent(getApplicationContext(),FavoritesActivity.class);
+                    startActivityForResult(intent, 0);
+                }
+
+            }
+        });
+
+
+        eventListP.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(getApplicationContext(),DashboardActivity.class);
+                startActivityForResult(intent,1);
+            }
+        });
+
+        account.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(SharedUserID.equals("nu"))
+                {
+                    Intent intent=new Intent(getApplicationContext(),MainActivity.class);
+                    startActivityForResult(intent,0);
+                }
+                else
+                {
+                    Intent intent=new Intent(getApplicationContext(),settingsActivity.class);
+                    startActivityForResult(intent,0);
+                }
+
+            }
+        });
+
         joinIcon=(ImageView) findViewById(R.id.joinIcon);
+
         ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(this)
                 .diskCacheExtraOptions(480, 800, null)
                 .build();
@@ -96,7 +137,20 @@ public class EventInfo extends ActionBarActivity {
         end_hour=someData.getString("end_hour","");
         id=someData.getInt("event_id",0);
         ifProg=someData.getString("ifProg","");
+        d=someData.getString("daysDiff","");
         setTitle("");
+
+        TextView days=(TextView) findViewById(R.id.daysDiff);
+        if(d.equals('0')) {
+            days.setText("Astăzi");
+        }
+        if(d.equals('1'))
+            days.setText("Mâine");
+        else
+            days.setText("Începe în "+d+" zile");
+        if(Integer.parseInt(d)<0){
+            days.setText("În desfasurare de "+Math.abs(Integer.parseInt(d))+" zile");
+        }
 
         id_string=id.toString();
 
@@ -105,22 +159,12 @@ public class EventInfo extends ActionBarActivity {
         if(ifProg.equals("0")){
             ProgButton.setEnabled(false);
         }
-        TextView organization_e=(TextView) findViewById(R.id.org);
+        TextView organization_e=(TextView) findViewById(R.id.days);
         organization_e.setText(titlu);
+        joinContainer=(RelativeLayout) findViewById(R.id.joinContainer);
 
 
 
-        TextView start_date=(TextView) findViewById(R.id.startDate);
-        start_date.setText(start);
-
-        TextView end_date=(TextView) findViewById(R.id.endDate);
-        end_date.setText(end);
-
-        TextView s_hour=(TextView) findViewById(R.id.start_hour);
-        s_hour.setText(start_hour);
-
-        TextView e_hour=(TextView) findViewById(R.id.end_hour);
-        e_hour.setText(end_hour);
 
         TextView ev_address=(TextView) findViewById(R.id.address);
         ev_address.setText(adresa);
@@ -168,7 +212,9 @@ public class EventInfo extends ActionBarActivity {
         });
 
 
-
+        over=(RelativeLayout) findViewById(R.id.overlayBg);
+        over.bringToFront();
+        over.setVisibility(View.INVISIBLE);
         Detalii=(Button) findViewById(R.id.detalii);
         Detalii.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -191,11 +237,12 @@ public class EventInfo extends ActionBarActivity {
 
         }
 
-        if(SharedUserID.equals("nu"))
+       /* if(SharedUserID.equals("nu"))
         {
             joinIcon.setVisibility(View.INVISIBLE);
-        }else{
+        }else{*/
             joinIcon.setVisibility(View.VISIBLE);
+        joinIcon.bringToFront();
             joinIcon.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -204,7 +251,7 @@ public class EventInfo extends ActionBarActivity {
                     }
                 }
             });
-        }
+        //}
 
 
     }
@@ -320,6 +367,22 @@ public class EventInfo extends ActionBarActivity {
             return content;
         }
 
+        private void refreshTimer() {
+            Timer autoUpdate = new Timer();
+            autoUpdate.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    runOnUiThread(new Runnable() {
+                        public void run() {
+                            Animation out = AnimationUtils.makeOutAnimation(getApplicationContext(), true);
+                            over.startAnimation(out);
+                            over.setVisibility(View.INVISIBLE);
+                        }
+                    });
+                }
+            }, 2000);
+        }
+
         @Override
         protected void onPostExecute(String s) {
             //updateDisplay(s);
@@ -327,27 +390,35 @@ public class EventInfo extends ActionBarActivity {
                 try{
                   /*  pb.setVisibility(View.INVISIBLE);*/
                     if(s.toString().equals("inserted\n")) {
-                        menu.getItem(1).setIcon(getResources().getDrawable(R.drawable.j_true));
+                        //menu.getItem(1).setIcon(getResources().getDrawable(R.drawable.j_true));
                         joinIcon.setImageResource(R.drawable.j_true);
-
                         action="1";
+                        Animation in = AnimationUtils.loadAnimation(getApplicationContext(), android.R.anim.fade_in);
+                        over.startAnimation(in);
+                        over.setVisibility(View.VISIBLE);
+                        refreshTimer();
+                        joinContainer.setBackgroundResource(R.color.red);
+
                     }
 
                     if(s.toString().equals("deleted\n")) {
-                        menu.getItem(1).setIcon(getResources().getDrawable(R.drawable.j));
+                        //menu.getItem(1).setIcon(getResources().getDrawable(R.drawable.j));
                         joinIcon.setImageResource(R.drawable.j);
+                        joinContainer.setBackgroundResource(R.color.white);
                         action="0";
                     }
 
                     if(s.toString().equals("true\n")){
-                        menu.getItem(1).setIcon(getResources().getDrawable(R.drawable.j_true));
+                        //menu.getItem(1).setIcon(getResources().getDrawable(R.drawable.j_true));
                         joinIcon.setImageResource(R.drawable.j_true);
+                        joinContainer.setBackgroundResource(R.color.red);
                         action="1";
                     }
 
                     if(s.toString().equals("false\n")){
-                        menu.getItem(1).setIcon(getResources().getDrawable(R.drawable.j));
+                        //menu.getItem(1).setIcon(getResources().getDrawable(R.drawable.j));
                         joinIcon.setImageResource(R.drawable.j);
+                        joinContainer.setBackgroundResource(R.color.white);
                         action="0";
                     }
                 }

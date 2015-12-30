@@ -2,24 +2,70 @@
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="ro.as_mi.sniff.sniffevents.FeedbackActivity"
-    android:padding="10dp">
+    android:padding="0dp">
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentEnd="true"
+        android:id="@+id/relativeLayout"
+        android:background="#e9e9e9"
+        android:elevation="7dp"
+        android:gravity="center">
 
+        <LinearLayout
+            android:layout_width="300dp"
+            android:layout_height="fill_parent"
+            android:padding="15dp"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_alignBottom="@+id/relativeLayout2"
+            android:layout_centerHorizontal="true">
+
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/eventListP"
+                android:src="@drawable/list30" />
+
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/userP"
+                android:src="@drawable/user42" />
+
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/heartP"
+                android:src="@drawable/heart30" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="3dp"
+            android:background="#258e25"
+            android:gravity="bottom"
+            android:visibility="visible"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:id="@+id/relativeLayout2"></RelativeLayout>
+    </RelativeLayout>
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
         android:ems="10"
         android:id="@+id/nume"
-        android:layout_alignParentTop="true"
         android:background="#fff"
         android:padding="10dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
+        android:hint="Nume (Optional)"
+        android:layout_below="@+id/relativeLayout"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:hint="Nume (Optional)"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_margin="10dp" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -27,7 +73,7 @@
         android:ems="10"
         android:id="@+id/feedback"
         android:layout_below="@+id/nume"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="0dp"
         android:background="#fff"
         android:padding="10dp"
         android:hint="Feedback"
@@ -35,7 +81,10 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp" />
 
     <Button
         android:layout_width="wrap_content"

@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -50,6 +51,55 @@ public class FeedbackActivity extends ActionBarActivity {
         message.setText("");
 
         setTitle("Feedback");
+
+        ImageView eventListP;
+        ImageView account;
+        eventListP=(ImageView) findViewById(R.id.eventListP);
+        account=(ImageView) findViewById(R.id.userP);
+        ImageView heartP;
+        heartP=(ImageView) findViewById(R.id.heartP);
+        heartP.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(SharedUserID.equals("nu"))
+                {
+                    Intent intent=new Intent(getApplicationContext(),MainActivity.class);
+                    startActivityForResult(intent, 0);
+                }
+                else
+                {
+                    Intent intent=new Intent(getApplicationContext(),FavoritesActivity.class);
+                    startActivityForResult(intent, 0);
+                }
+
+            }
+        });
+
+
+        eventListP.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(getApplicationContext(),DashboardActivity.class);
+                startActivityForResult(intent,1);
+            }
+        });
+
+        account.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(SharedUserID.equals("nu"))
+                {
+                    Intent intent=new Intent(getApplicationContext(),MainActivity.class);
+                    startActivityForResult(intent,0);
+                }
+                else
+                {
+                    Intent intent=new Intent(getApplicationContext(),settingsActivity.class);
+                    startActivityForResult(intent,0);
+                }
+
+            }
+        });
         pb.setVisibility(View.INVISIBLE);
         Feedback_btn = (Button) findViewById(R.id.sendFeedback);
         Feedback_btn.setOnClickListener(new View.OnClickListener() {

@@ -15,10 +15,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -35,6 +39,8 @@ public class FavoritesActivity extends ActionBarActivity {
     final List<Events> eventsList=new ArrayList<>();
     public static String filename="MySharedString";
 
+    ImageLoader imageLoader = ImageLoader.getInstance(); // Get singleton instance
+
     /*public static String get_projects_url="http://sniff.as-mi.ro/services/getPublicEvents.php";*/
     public static String get_projects_url="http://sniff.as-mi.ro/services/getFavorites.php";
     @Override
@@ -46,9 +52,43 @@ public class FavoritesActivity extends ActionBarActivity {
         pb=(ProgressBar)findViewById(R.id.loader);
         pb.setVisibility(View.INVISIBLE);
 
+        ImageView eventListP;
+        ImageView account;
+        eventListP=(ImageView) findViewById(R.id.eventListP);
+        account=(ImageView) findViewById(R.id.userP);
+        ImageView heartP;
+        heartP=(ImageView) findViewById(R.id.heartP);
+        heartP.setImageResource(R.drawable.heart30active);
+
+
+        eventListP.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(getApplicationContext(),DashboardActivity.class);
+                startActivityForResult(intent,1);
+            }
+        });
+
+        account.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                    Intent intent=new Intent(getApplicationContext(),settingsActivity.class);
+                    startActivityForResult(intent,0);
+
+
+            }
+        });
+
 
         if(isOnline()){
             requestData(get_projects_url,someData.getString("id","0"));
+            ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(this)
+                    .diskCacheExtraOptions(480, 800, null)
+                    .build();
+
+            ImageLoader.getInstance().init(config);
         }else{
             Toast.makeText(getApplicationContext(), "Internetul este dezactivat", Toast.LENGTH_LONG).show();
         }
@@ -216,7 +256,7 @@ public class FavoritesActivity extends ActionBarActivity {
             TextView event_name=(TextView) viewItem.findViewById(R.id.titlu);
             event_name.setText(currentE.getTitlu());
             Integer d=Integer.parseInt(currentE.getDiff()) ;
-            TextView organization_e=(TextView) viewItem.findViewById(R.id.org);
+            TextView organization_e=(TextView) viewItem.findViewById(R.id.days);
             if(currentE.getDiff().equals('0')) {
                 organization_e.setText("Astazi");
             }
@@ -230,6 +270,8 @@ public class FavoritesActivity extends ActionBarActivity {
 
             TextView cat=(TextView) viewItem.findViewById(R.id.cat);
             cat.setText(currentE.getCategorie());
+
+            imageLoader.displayImage("http://sniff.as-mi.ro/services/images/"+currentE.getId()+"_r.png", (ImageView) viewItem.findViewById(R.id.image));
 
             return viewItem;
         }

@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 
 
 public class settingsActivity extends ActionBarActivity {
@@ -17,10 +18,36 @@ public class settingsActivity extends ActionBarActivity {
     Button Fav;
     public static String filename="MySharedString";
     SharedPreferences someData;
+    ImageView eventListP;
+    ImageView account;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
+        eventListP=(ImageView) findViewById(R.id.eventListP);
+        account=(ImageView) findViewById(R.id.userP);
+        account.setImageResource(R.drawable.user42active);
+        ImageView heartP;
+        heartP=(ImageView) findViewById(R.id.heartP);
+        heartP.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                    Intent intent=new Intent(getApplicationContext(),FavoritesActivity.class);
+                    startActivityForResult(intent, 0);
+
+
+            }
+        });
+
+        eventListP.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(getApplicationContext(),DashboardActivity.class);
+                startActivityForResult(intent,1);
+            }
+        });
         someData = getSharedPreferences(filename,0);
         SchimbaParola=(Button) findViewById(R.id.SchimbaParola);
         SchimbaParola.setOnClickListener(new View.OnClickListener() {
