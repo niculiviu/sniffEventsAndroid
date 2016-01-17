@@ -6,22 +6,16 @@ import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 
 public class FeedbackActivity extends ActionBarActivity {
@@ -109,6 +103,25 @@ public class FeedbackActivity extends ActionBarActivity {
                 if(isOnline()){
                     requestData(send_feedback_url,id.toString(),name.getText().toString(),message.getText().toString());
                 }
+            }
+        });
+
+        ImageView messagesImg;
+        messagesImg=(ImageView) findViewById(R.id.chatP);
+        messagesImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(SharedUserID.equals("nu"))
+                {
+                    Intent intent=new Intent(getApplicationContext(),MainActivity.class);
+                    startActivityForResult(intent, 0);
+                }
+                else
+                {
+                    Intent intent=new Intent(getApplicationContext(),MessagesActivity.class);
+                    startActivityForResult(intent, 0);
+                }
+
             }
         });
 

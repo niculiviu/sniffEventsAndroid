@@ -80,6 +80,18 @@ public class FavoritesActivity extends ActionBarActivity {
 
             }
         });
+        ImageView messagesImg;
+        messagesImg=(ImageView) findViewById(R.id.chatP);
+        messagesImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                    Intent intent=new Intent(getApplicationContext(),MessagesActivity.class);
+                    startActivityForResult(intent, 0);
+                }
+
+
+        });
 
 
         if(isOnline()){

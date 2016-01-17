@@ -2,6 +2,12 @@
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="ro.as_mi.sniff.sniffevents.DashboardActivity">
+    <RelativeLayout
+        android:id="@+id/linearLayout_focus"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:layout_width="0px"
+        android:layout_height="0px"/>
 
     <RelativeLayout
         android:layout_width="fill_parent"
@@ -42,17 +48,44 @@
                 android:id="@+id/chatP"
                 android:src="@drawable/chat81" />
         </LinearLayout>
+
     </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="fill_parent"
-        android:layout_height="3dp"
+        android:layout_height="wrap_content"
         android:background="#258e25"
-        android:layout_above="@+id/frameLayout2"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="false"
         android:gravity="bottom"
-        android:visibility="visible"></RelativeLayout>
+        android:visibility="visible"
+
+        android:layout_alignTop="@+id/frameLayout2"
+        android:layout_toEndOf="@+id/frameLayout2"
+        android:id="@+id/search_container"
+        android:layout_toRightOf="@+id/frameLayout2">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/searchText"
+            android:layout_toLeftOf="@+id/searchImg"
+            android:textColor="@color/white"
+            android:background="@color/green"
+            android:padding="10dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+             />
+
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:id="@+id/searchImg"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:src="@drawable/magnifyingglass32"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp" />
+    </RelativeLayout>
 
     <FrameLayout
         android:layout_width="70dp"
@@ -66,7 +99,7 @@
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
+            android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal|top"
             android:weightSum="1">
 
@@ -134,7 +167,7 @@
         android:layout_height="wrap_content"
         android:layout_toRightOf="@+id/frameLayout2"
         android:layout_toEndOf="@+id/frameLayout2"
-        android:layout_below="@+id/relativeLayout">
+        android:layout_below="@+id/search_container">
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -11,8 +11,9 @@ import android.graphics.Movie;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
@@ -27,26 +28,21 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
-
-import android.support.v4.widget.SwipeRefreshLayout;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
-
-import java.util.ArrayList;
-import java.util.List;
-
-
-import java.io.InputStream;
-import java.net.URL;
-
 
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.wdullaer.swipeactionadapter.SwipeActionAdapter;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.io.InputStream;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class DashboardActivity extends ActionBarActivity {
@@ -74,7 +70,8 @@ public class DashboardActivity extends ActionBarActivity {
     ImageView tr;
     ImageView eventListP;
     ImageView account;
-
+public TextView searchText;
+    public RelativeLayout searchContainer;
 
 
     private SwipeRefreshLayout swipeRefreshLayout;
@@ -87,7 +84,7 @@ public class DashboardActivity extends ActionBarActivity {
     public static String getGet_projects_cat="http://sniff.as-mi.ro/services/mobileGetPublishedEventsByCategory.php";
     public static String getGet_projects_date="http://sniff.as-mi.ro/services/mobileGetPublishEventsByDate.php";
     public static String getGet_projects_org="http://sniff.as-mi.ro/services/mobileGetPublishedEventsByOrg.php";
-
+    public static String search_projects_org="http://sniff.as-mi.ro/services/search.php";
     public void sw() {
         listView.setOnTouchListener(new View.OnTouchListener() {
             private static final int DEFAULT_THRESHOLD = 128;
@@ -133,9 +130,21 @@ public class DashboardActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
         String page="Dashboard";
-
+        searchText=(TextView) findViewById(R.id.searchText);
+        searchContainer=(RelativeLayout) findViewById(R.id.linearLayout_focus);
         eventListP=(ImageView) findViewById(R.id.eventListP);
         account=(ImageView) findViewById(R.id.userP);
+
+        ImageView searchImg=(ImageView) findViewById(R.id.searchImg);
+        searchImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String textForSearch= searchText.getText().toString();
+                requestDataSearch(search_projects_org, textForSearch);
+            }
+        });
+
         ImageView heartP;
         heartP=(ImageView) findViewById(R.id.heartP);
         heartP.setOnClickListener(new View.OnClickListener() {
@@ -171,6 +180,25 @@ public class DashboardActivity extends ActionBarActivity {
                 else
                 {
                     Intent intent=new Intent(getApplicationContext(),settingsActivity.class);
+                    startActivityForResult(intent, 0);
+                }
+
+            }
+        });
+
+        ImageView messagesImg;
+        messagesImg=(ImageView) findViewById(R.id.chatP);
+        messagesImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(SharedUserID.equals("nu"))
+                {
+                    Intent intent=new Intent(getApplicationContext(),MainActivity.class);
+                    startActivityForResult(intent, 0);
+                }
+                else
+                {
+                    Intent intent=new Intent(getApplicationContext(),MessagesActivity.class);
                     startActivityForResult(intent, 0);
                 }
 
@@ -376,6 +404,15 @@ public class DashboardActivity extends ActionBarActivity {
         return super.onContextItemSelected(item);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        //do not give the editbox focus automatically when activity starts
+        //searchText.clearFocus();
+       searchContainer.requestFocus();
+    }
+
     private void requestData(String uri) {
 
         RequestPackage p = new RequestPackage();
@@ -393,6 +430,18 @@ public class DashboardActivity extends ActionBarActivity {
         p.setMethod("POST");
         p.setUri(uri);
         p.SetParam("id", id);
+
+
+        MyTask task= new MyTask();
+        task.execute(p);
+    }
+
+    private void requestDataSearch(String uri,String text){
+
+        RequestPackage p = new RequestPackage();
+        p.setMethod("POST");
+        p.setUri(uri);
+        p.SetParam("event_name", text);
 
 
         MyTask task= new MyTask();

@@ -38,6 +38,11 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/heartP"
                 android:src="@drawable/heart30" />
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/chatP"
+                android:src="@drawable/chat81" />
         </LinearLayout>
 
         <RelativeLayout

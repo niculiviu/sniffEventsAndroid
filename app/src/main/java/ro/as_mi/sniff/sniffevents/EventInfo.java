@@ -118,6 +118,25 @@ public class EventInfo extends ActionBarActivity {
             }
         });
 
+        ImageView messagesImg;
+        messagesImg=(ImageView) findViewById(R.id.chatP);
+        messagesImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(SharedUserID.equals("nu"))
+                {
+                    Intent intent=new Intent(getApplicationContext(),MainActivity.class);
+                    startActivityForResult(intent, 0);
+                }
+                else
+                {
+                    Intent intent=new Intent(getApplicationContext(),MessagesActivity.class);
+                    startActivityForResult(intent, 0);
+                }
+
+            }
+        });
+
         joinIcon=(ImageView) findViewById(R.id.joinIcon);
 
         ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(this)

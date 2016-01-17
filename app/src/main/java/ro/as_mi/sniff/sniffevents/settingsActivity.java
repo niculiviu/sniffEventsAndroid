@@ -48,6 +48,19 @@ public class settingsActivity extends ActionBarActivity {
                 startActivityForResult(intent,1);
             }
         });
+        ImageView messagesImg;
+        messagesImg=(ImageView) findViewById(R.id.chatP);
+        messagesImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                    Intent intent=new Intent(getApplicationContext(),MessagesActivity.class);
+                    startActivityForResult(intent, 0);
+
+
+            }
+        });
         someData = getSharedPreferences(filename,0);
         SchimbaParola=(Button) findViewById(R.id.SchimbaParola);
         SchimbaParola.setOnClickListener(new View.OnClickListener() {

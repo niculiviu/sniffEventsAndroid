@@ -6,7 +6,6 @@
         android:minSdkVersion="8"
         android:targetSdkVersion="16" />
 
-
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
@@ -67,7 +66,6 @@
             android:name=".Register"
             android:label="@string/title_activity_register"
             android:windowActionBar="false" >
-
         </activity>
         <activity
             android:name=".DashboardActivity"
@@ -168,8 +166,21 @@
                 <category android:name="ro.as_mi.sniff.sniffevents" />
             </intent-filter>
         </receiver>
+
         <service android:name=".GcmIntentService" />
 
+        <activity
+            android:name=".MessagesActivity"
+            android:label="@string/title_activity_messages" >
+        </activity>
+        <activity
+            android:name=".ProMessages"
+            android:label="@string/title_activity_pro_messages"
+            android:parentActivityName=".MessagesActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="ro.as_mi.sniff.sniffevents.MessagesActivity" />
+        </activity>
     </application>
 
 </manifest>
