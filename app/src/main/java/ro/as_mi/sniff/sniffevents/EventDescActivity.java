@@ -26,6 +26,8 @@ public class EventDescActivity extends ActionBarActivity {
         ev_desc.setText(someData.getString("description","No Description"));
     }
 
+
+
     public boolean onPrepareOptionsMenu(Menu menu)
     {
         MenuItem userIcon = menu.findItem(R.id.action_settings);

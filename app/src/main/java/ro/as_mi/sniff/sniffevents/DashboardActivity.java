@@ -139,9 +139,17 @@ public TextView searchText;
         searchImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                ed.setAlpha((float) 0.4);
+                ca.setAlpha((float) 0.4);
+                so.setAlpha((float) 0.4);
+                di.setAlpha((float) 0.4);
+                co.setAlpha((float) 0.4);
+                tr.setAlpha((float) 0.4);
                 String textForSearch= searchText.getText().toString();
-                requestDataSearch(search_projects_org, textForSearch);
+                if(!textForSearch.equals(""))
+                    requestDataSearch(search_projects_org, textForSearch);
+                else
+                    requestData(get_projects_url);
             }
         });
 
@@ -258,6 +266,7 @@ public TextView searchText;
             public void onClick(View v) {
                 String cat_id="1";
                 requestDataEvCat(getGet_projects_cat, cat_id);
+                Toast.makeText(getApplicationContext(),"Educational",Toast.LENGTH_LONG).show();
                 ed.setAlpha((float) 1);
                 ca.setAlpha((float) 0.4);
                 so.setAlpha((float) 0.4);
@@ -276,6 +285,7 @@ public TextView searchText;
             public void onClick(View v) {
                 String cat_id="2";
                 requestDataEvCat(getGet_projects_cat, cat_id);
+                Toast.makeText(getApplicationContext(),"Cariera",Toast.LENGTH_LONG).show();
                 ed.setAlpha((float) 0.4);
                 ca.setAlpha((float) 1);
                 so.setAlpha((float) 0.4);
@@ -292,6 +302,7 @@ public TextView searchText;
             public void onClick(View v) {
                 String cat_id="3";
                 requestDataEvCat(getGet_projects_cat, cat_id);
+                Toast.makeText(getApplicationContext(),"Social",Toast.LENGTH_LONG).show();
                 ed.setAlpha((float) 0.4);
                 ca.setAlpha((float) 0.4);
                 so.setAlpha((float) 1);
@@ -308,6 +319,7 @@ public TextView searchText;
             public void onClick(View v) {
                 String cat_id="4";
                 requestDataEvCat(getGet_projects_cat, cat_id);
+                Toast.makeText(getApplicationContext(),"Distractie",Toast.LENGTH_LONG).show();
                 ed.setAlpha((float) 0.4);
                 ca.setAlpha((float) 0.4);
                 so.setAlpha((float) 0.4);
@@ -324,6 +336,7 @@ public TextView searchText;
             public void onClick(View v) {
                 String cat_id="5";
                 requestDataEvCat(getGet_projects_cat, cat_id);
+                Toast.makeText(getApplicationContext(),"Concurs",Toast.LENGTH_LONG).show();
                 ed.setAlpha((float) 0.4);
                 ca.setAlpha((float) 0.4);
                 so.setAlpha((float) 0.4);
@@ -340,6 +353,7 @@ public TextView searchText;
             public void onClick(View v) {
                 String cat_id="6";
                 requestDataEvCat(getGet_projects_cat, cat_id);
+                Toast.makeText(getApplicationContext(),"Training",Toast.LENGTH_LONG).show();
                 ed.setAlpha((float) 0.4);
                 ca.setAlpha((float) 0.4);
                 so.setAlpha((float) 0.4);
@@ -525,29 +539,35 @@ public TextView searchText;
         }
 
         if(id==R.id.educational){
+
             String cat_id="1";
             requestDataEvCat(getGet_projects_cat, cat_id);
         }
 
         if(id==R.id.cariera){
+
             String cat_id="2";
             requestDataEvCat(getGet_projects_cat,cat_id);
         }
 
         if(id==R.id.social){
+
             String cat_id="3";
             requestDataEvCat(getGet_projects_cat,cat_id);
         }
 
         if(id==R.id.distractie){
+
             String cat_id="4";
             requestDataEvCat(getGet_projects_cat,cat_id);
         }
         if(id==R.id.concurs){
+
             String cat_id="5";
             requestDataEvCat(getGet_projects_cat,cat_id);
         }
         if(id==R.id.training){
+
             String cat_id="6";
             requestDataEvCat(getGet_projects_cat,cat_id);
         }

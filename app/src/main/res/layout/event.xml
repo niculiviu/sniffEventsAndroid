@@ -6,12 +6,13 @@
 
     <ImageView
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="120dp"
         android:id="@+id/image"
         android:focusableInTouchMode="false"
-        android:layout_gravity="top|left|bottom|right"
+        android:layout_gravity="left|right"
         android:baselineAlignBottom="true"
-        android:adjustViewBounds="true" />
+        android:adjustViewBounds="false"
+        android:scaleType="centerCrop" />
 
     <RelativeLayout
         android:layout_width="fill_parent"

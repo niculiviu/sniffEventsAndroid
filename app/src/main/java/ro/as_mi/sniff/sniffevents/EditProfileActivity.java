@@ -103,6 +103,14 @@ public class EditProfileActivity extends ActionBarActivity {
     }
 
     @Override
+    public  void onBackPressed() {
+        Intent intent=new Intent(this,DashboardActivity.class);
+        startActivityForResult(intent,0);
+        overridePendingTransition  (R.anim.abc_fade_in, R.anim.abc_fade_out);
+    }
+
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long

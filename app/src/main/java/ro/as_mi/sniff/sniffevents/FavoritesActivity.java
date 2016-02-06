@@ -138,7 +138,12 @@ public class FavoritesActivity extends ActionBarActivity {
         getMenuInflater().inflate(R.menu.menu_favorites, menu);
         return true;
     }
-
+    @Override
+    public  void onBackPressed() {
+        Intent intent=new Intent(this,DashboardActivity.class);
+        startActivityForResult(intent,0);
+        overridePendingTransition  (R.anim.abc_fade_in, R.anim.abc_fade_out);
+    }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will

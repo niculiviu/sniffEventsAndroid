@@ -132,8 +132,9 @@
 
         <ImageView
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/p" />
+            android:layout_height="120dp"
+            android:id="@+id/p"
+            android:scaleType="fitXY" />
 
         <TextView
         android:layout_width="fill_parent"

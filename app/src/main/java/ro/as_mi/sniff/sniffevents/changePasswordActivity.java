@@ -89,6 +89,13 @@ public class changePasswordActivity extends ActionBarActivity {
         task.execute(p);
     }
 
+    @Override
+    public  void onBackPressed() {
+        Intent intent=new Intent(this,DashboardActivity.class);
+        startActivityForResult(intent,0);
+        overridePendingTransition  (R.anim.abc_fade_in, R.anim.abc_fade_out);
+    }
+
     protected boolean isOnline(){
         ConnectivityManager cm = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo=cm.getActiveNetworkInfo();

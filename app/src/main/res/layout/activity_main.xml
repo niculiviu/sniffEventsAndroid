@@ -4,7 +4,7 @@
     android:paddingRight="2dp"
     android:paddingTop="2dp"
     android:paddingBottom="2dp" tools:context=".MainActivity"
-    android:background="@drawable/bg"
+    android:background="@color/darkGrey"
     android:padding="10dp">
 
     <EditText
@@ -98,5 +98,14 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="5dp"
         android:textColor="#a3a3a3" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="300dp"
+        android:id="@+id/imageView3"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/sniff"
+        android:layout_alignBottom="@+id/progressBar"
+        android:scaleType="fitCenter" />
 
 </RelativeLayout>
